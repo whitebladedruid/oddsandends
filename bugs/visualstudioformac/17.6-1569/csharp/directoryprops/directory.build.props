@@ -1,0 +1,34 @@
+<Project>
+    <PropertyGroup>
+  
+      <Company>The Corp.</Company>
+      <Copyright>Copyright © The Corp.</Copyright>
+  
+      <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
+      <TheOut Condition=" '$(TheOut)' == '' ">$([System.IO.Path]::Combine('$(RepoRoot)', '.theout'))</TheOut>
+      <ExternalNuget>$(TheOut)\Nuget</ExternalNuget>
+  
+      <!-- Set build directory paths -->
+      <AppendTargetFrameworkToOutputPath>True</AppendTargetFrameworkToOutputPath>
+      <OutBase Condition=" '$(OutBase)' == '' ">$(TheOut)</OutBase>
+      <OutBaseFixed>$([MSBUILD]::EnsureTrailingSlash($(TheOut)))</OutBaseFixed>
+      <BaseOutDir>$(OutBaseFixed)__bin\</BaseOutDir>
+  
+      <!-- Artifacts required for nuget restore will be dropped in BaseIntermediateOutputPath while the artifacts
+        traditionally found in obj will be placed in IntermediateOutputPath -->
+      <BaseIntermediateOutputPath>$(OutBaseFixed)__obj\$(Configuration)\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+      <IntermediateOutputPath>$(BaseIntermediateOutputPath)obj</IntermediateOutputPath>
+      <OutputPath>$(BaseOutDir)$(Configuration)\$(MSBuildProjectName)\</OutputPath>
+  
+    </PropertyGroup>
+  </Project>
+  
+  <!--
+  
+  If you are going to add Directory.Build.props up closer to where your project lives, make sure
+  to look at https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build?view=vs-2019
+  
+  to see what you will need to do in your own Directory.Build.props file to make sure you
+  can get to this one.
+  
+  -->

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!--
+        This is necessary to make sure incremental builds picks this file up as a file that should
+        cause a rebuild if it changed.
+    -->
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+</Project>
+
+<!--
+
+If you are going to add Directory.Build.props up closer to where your project lives, make sure
+to look at https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build?view=vs-2019
+
+to see what you will need to do in your own Directory.Build.props file to make sure you
+can get to this one.
+
+-->
